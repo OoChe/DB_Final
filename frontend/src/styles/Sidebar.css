@@ -1,0 +1,26 @@
+.filter-sidebar {
+    flex: 1;
+    background: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    align-items: center;
+  }
+  
+  h3 {
+    margin-top: 0;
+  }
+  
+  .filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .tag {
+    background: #ddd;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
