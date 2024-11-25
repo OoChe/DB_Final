@@ -5,6 +5,7 @@ import SignUp from '../src/pages/User/SignUp.jsx';
 import EventPage from './pages/Event/EventPage.jsx';
 import EventInfo from '../src/pages/Event/EventInfo.jsx';
 import MyPage from '../src/pages/User/MyPage.jsx';
+import ModifyUserInfo from '../src/pages/User/ModifyUserInfo.jsx';
 import HotelPage from './pages/Hotel/HotelPage'; // 숙소 페이지 컴포넌트
 import TopDestinations from './pages/TopDestinationsPage'; // 인기 여행지 페이지 컴포넌트
 import BookAccommodation from './pages/Hotel/BookHotelPage'; // 숙소 예약 페이지 컴포넌트

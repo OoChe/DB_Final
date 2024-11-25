@@ -24,8 +24,9 @@
   }
   
   .title {
-    font-size: 15px;
-    font-family: 'TheJamsil-Bold';
+    margin: 0 0 2px;
+    font-size: 18px;
+    font-weight: bold;
   }
   
   .subtitle {
