@@ -23,7 +23,7 @@ export default function HotelPage() {
 
   return (
     <div className='hotel-page'>
-      <p className='title'>숙소</p>
+      <p className='HotelPage-title'>숙소</p>
       <div className='sorting-options'>
         <button
           className={filter === '최신순' ? 'active' : ''}

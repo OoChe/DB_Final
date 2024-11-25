@@ -9,7 +9,7 @@ function Header() {
   const navigate = useNavigate();
 
   const menuItems = [
-    { label: '행사', path: '/events' },
+    { label: '행사', path: '/event' },
     { label: '숙소', path: '/hotel' },
     { label: '인기 여행지 TOP 10', path: '/top-destinations' },
     { label: '숙소 예약', path: '/bookhotel' },

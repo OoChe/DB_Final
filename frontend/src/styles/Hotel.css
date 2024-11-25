@@ -5,10 +5,10 @@
 }
 
 /* 제목 */
-.title {
+.HotelPage-title {
   font-family: 'TheJamsil-Bold';
   font-size: 72px;
-  top: 208px;
+  top: 50px;
   bottom: 212px;
 }
 
