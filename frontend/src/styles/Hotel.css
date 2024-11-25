@@ -1,0 +1,116 @@
+/* 전체 페이지 고정 크기 */
+.hotel-page {
+  width: 1600px;
+  padding-inline: 180px;
+}
+
+/* 제목 */
+.HotelPage-title {
+  font-family: 'TheJamsil-Bold';
+  font-size: 72px;
+  top: 50px;
+  bottom: 212px;
+}
+
+/* 정렬 옵션 */
+.sorting-options {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  border-color: #000;
+  border-width: 1px;
+}
+
+.sorting-options button {
+  padding: 8px 16px;
+  margin-left: 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+}
+
+.sorting-options .active {
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* 메인 콘텐츠 영역 */
+.main-content {
+  display: flex;
+  gap: 20px;
+}
+
+/* 숙소 리스트 */
+.hotel-list {
+  width: 800px; /* 고정 너비 */
+}
+
+.hotel-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+.hotel-name {
+  width: 458px;
+  height: 40px;
+  position: relative;
+  left: 43px;
+  top: 30px;
+  font-size: 30px;
+  font-family: 'TheJamsil-Bold';
+}
+
+.hotel-region {
+  width: 249px;
+  height: 21px;
+  position: relative;
+  left: 43px;
+  font-family: 'TheJamsil-Regular';
+  font-size: 25px;
+  color: #757575;
+}
+
+.hotel-owner {
+  width: 249px;
+  height: 21px;
+  position: relative;
+  left: 43px;
+  top: 15px;
+  font-family: 'TheJamsil-Regular';
+  font-size: 20px;
+  color: #757575;
+}
+
+.icon {
+  position: relative;
+  left: 700px;
+  top: -135px;
+  font-size: 20px;
+  color: gray;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.icon.clicked {
+  color: gold;
+}
+
+/* 필터 섹션 */
+.region-section {
+  width: 300px; /* 고정 너비 */
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.region-buttons button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background: #f1f1f1;
+  cursor: pointer;
+}
