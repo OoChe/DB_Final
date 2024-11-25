@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home'; // 홈 페이지 컴포넌트
+import Login from './pages/LoginPage';
+import SignUp from './pages/SignUpPage';
 import Events from './pages/Event/EvenPage'; // 행사 페이지 컴포넌트
 import Accommodations from './pages/Hotel/HotelPage'; // 숙소 페이지 컴포넌트
 import TopDestinations from './pages/TopDestinationsPage'; // 인기 여행지 페이지 컴포넌트
@@ -20,6 +22,8 @@ function App() {
         <Route path="/top-destinations" element={<TopDestinations />} />
         <Route path="/bookhotel" element={<BookAccommodation />} />
         <Route path="/registerhotel" element={<RegisterAccommodation />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </Router>
   );

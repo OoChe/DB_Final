@@ -33,10 +33,20 @@
   background-color: #f5f5f5; /* 호버 시 배경색 */
 }
 
+.title-text {
+  font-family: TheJamsil-ExtraBold;
+  font-size: 20px;
+  white-space: nowrap;
+  color: #1e1e1e;
+  margin-left: 20px;
+  margin-right: 50px;
+  cursor: pointer;
+}
+
 .menu-text {
   font-family: TheJamsil-Regular;
   font-size: 15px;
-  font-weight: 300;
+  white-space: nowrap;
   color: #1e1e1e;
 }
 
@@ -47,4 +57,27 @@
   align-items: center;
   gap: 12px;
   margin-right: 20px;
+}
+
+.custom-button {
+  font-family: TheJamsil-Regular;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  border-width: 2px;
+  border-style: solid;
+  padding: 15px;
+  font-size: 15px;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* 호버 효과 추가 */
+.custom-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

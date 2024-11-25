@@ -1,6 +1,8 @@
+/* [헤더 컴포넌트]
+*/
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Header.css'; // 스타일 파일 import
+import '../styles/Header.css';
 import CustomButton from './CustomButton';
 
 function Header() {
@@ -17,6 +19,9 @@ function Header() {
   return (
     <div className="header-container">
       {/* 메뉴 섹션 */}
+      <div className="title-text" onClick={() => navigate('/')}>
+        Travel Guide
+      </div>
       <div className="header-menu">
         {menuItems.map((item) => (
           <div
@@ -36,12 +41,14 @@ function Header() {
           textColor={'#000000'}
           innerColor={'#CBEDF5'}
           borderColor={'#9FCED9'}
+          onClick={() => navigate('/login')}
         />
         <CustomButton
           text={'회원가입'}
           textColor={'#fff'}
           innerColor={'#59696C'}
           borderColor={'#2C2C2C'}
+          onClick={() => navigate('/signup')}
         />
       </div>
     </div>
