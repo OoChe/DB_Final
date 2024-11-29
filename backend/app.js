@@ -1,11 +1,15 @@
 const express = require('express');
+const cors = require('cors');
 const db = require('./Source/db');
 
 const app = express();
-const PORT = 3001;
+
+// CORS 설정: React에서 API를 호출할 수 있도록 허용
+app.use(cors());
+app.use(express.json()); // JSON 데이터 파싱
 
 // Route: Event 테이블 데이터 가져오기
-app.get('/event', (req, res) => {
+app.get('/api/hotel', (req, res) => {
   const query = 'SELECT * FROM Event'; // SQL 쿼리
   db.query(query, (err, results) => {
     if (err) {

@@ -1,0 +1,17 @@
+.star {
+  color: #ddd; /* 기본 상태 */
+  position: relative;
+  font-size: 1.5rem; /* 별 크기 조정 */
+}
+
+.star.filled {
+  color: #f4c542; /* 완전히 채운 별 */
+}
+
+.star.half-filled::before {
+  content: '★';
+  color: #f4c542; /* 일부만 채운 별 */
+  position: absolute;
+  width: 50%; /* 절반 채우기 */
+  overflow: hidden;
+}
