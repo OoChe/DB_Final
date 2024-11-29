@@ -43,6 +43,53 @@ VALUES (
     120000,
     'dongguki'
 );
+INSERT INTO Hotel (HotelName, hotelRegion, hotelAddress, hotelPrice, hotelOwnerID)
+VALUES (
+    'JS호텔분당',
+    '경기',
+    '경기도 성남시 분당구 황새울로311번길 36',
+    210000,
+    'dongguki'
+);
+INSERT INTO Hotel (HotelName, hotelRegion, hotelAddress, hotelPrice, hotelOwnerID)
+VALUES (
+    '로얄엠포리움호텔',
+    '인천',
+    '인천광역시 중구 중산동 1951-5',
+    110000,
+    'dongguki'
+), (
+    '나인트리프리미어호텔명동2',
+    '서울',
+    '서울특별시 중구 마른내로 28',
+    140000,
+    'dongguki'
+), (
+    '라마다앙코르제주서귀포',
+    '제주',
+    '제주특별자치도 서귀포시 서호중로 55',
+    180000,
+    'dongguki'
+);
+-- 트리거를 활용한 자동 호텔 값 생성
+DELIMITER $$
+
+CREATE TRIGGER generate_hotelID
+BEFORE INSERT ON Hotel
+FOR EACH ROW
+BEGIN
+    -- AutoID 대신 서브쿼리를 통해 현재 테이블의 최대 ID를 기반으로 hotelID 생성
+    DECLARE nextID INT;
+
+    -- 현재 테이블에서 AutoID의 최대값 + 1 계산
+    SELECT IFNULL(MAX(AutoID), 0) + 1 INTO nextID FROM Hotel;
+
+    -- hotelID를 생성하여 NEW.hotelID에 할당
+    SET NEW.hotelID = CONCAT('H', LPAD(nextID, 6, '0'));
+END$$
+
+DELIMITER ;
+
 -- 평균 후기 값 가져오는 쿼리문
     SELECT h.hotelID, h.hotelName, AVG(r.rateInfo) AS hotelRate
 FROM Hotel h

@@ -1,48 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/Hotel.css';
 import HotelCard from './HotelCard';
 import { Link } from 'react-router-dom';
 
 function HotelList({ selectedRegion = '전체' }) {
-  const hotelList = [
-    {
-      hotelID: 'H00000001',
-      hotelName: '호텔1',
-      hotelRegion: '서울',
-      hotelOwnerName: '호스트',
-    },
-    {
-      hotelID: 'H00000002',
-      hotelName: '호텔2',
-      hotelRegion: '부산',
-      hotelOwnerName: '호스트',
-    },
-    {
-      hotelID: 'H00000003',
-      hotelName: '호텔3',
-      hotelRegion: '광주',
-      hotelOwnerName: '호스트',
-    },
-    {
-      hotelID: 'H00000004',
-      hotelName: '호텔4',
-      hotelRegion: '경기',
-      hotelOwnerName: '호스트',
-    },
-    {
-      hotelID: 'H00000005',
-      hotelName: '호텔5',
-      hotelRegion: '충북',
-      hotelOwnerName: '호스트',
-    },
-    {
-      hotelID: 'H00000006',
-      hotelName: '호텔6',
-      hotelRegion: '서울',
-      hotelOwnerName: '호스트',
-    },
-  ];
-
+  // 백엔드에서 데이터를 가져오는 함수
+  const [hotelList, setHotelList] = useState([]);
   const [sortOption, setSortOption] = useState('latest'); // 초기 상태는 최신순
 
   const handleSortChange = (option) => {
@@ -73,6 +36,22 @@ function HotelList({ selectedRegion = '전체' }) {
     console.log(hotelList);
     return <div>데이터를 불러오는 중입니다...</div>;
   }
+
+  const fetchHotels = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/api/hotel'); // Node.js API 호출
+      // 3306 -> 3000 수정해야 API 호출 실패 안 뜸
+      const data = await response.json(); // JSON 데이터를 파싱
+      setHotelList(data); // 상태에 저장
+    } catch (error) {
+      console.error('API 호출 실패:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchHotels(); // 컴포넌트가 마운트되면 호출
+  }, []);
+
   return (
     <div className='hotel-list'>
       <hr></hr>

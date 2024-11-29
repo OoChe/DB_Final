@@ -11,7 +11,6 @@ const db = mysql.createConnection({
   connectionLimit: 10,
   queueLimit: 0,
 });
-PORT = PORT;
 
 // 연결 확인
 db.connect((err) => {

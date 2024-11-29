@@ -1,22 +1,25 @@
 const express = require('express');
+const db = require('./Configs/db');
 const cors = require('cors');
-const db = require('./Source/db');
+const session = require('express-session');
 
 const app = express();
+const PORT = 3001;
 
 // CORS 설정: React에서 API를 호출할 수 있도록 허용
 app.use(cors());
 app.use(express.json()); // JSON 데이터 파싱
 
-// Route: Event 테이블 데이터 가져오기
+// 숙소 데이터를 반환하는 API
 app.get('/api/hotel', (req, res) => {
-  const query = 'SELECT * FROM Event'; // SQL 쿼리
+  const query = 'SELECT * FROM Hotel';
   db.query(query, (err, results) => {
     if (err) {
-      console.error('쿼리 실행 중 오류 발생:', err);
-      res.status(500).send('서버 오류');
+      console.error(err);
+      res.status(500).json({ error: '서버 오류' });
     } else {
-      res.json(results); // 데이터 응답
+      res.status(200).json(results); // JSON 형식으로 React에 데이터 반환
+      console.log('Database results:', results);
     }
   });
 });
