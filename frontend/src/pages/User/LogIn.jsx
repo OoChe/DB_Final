@@ -2,29 +2,41 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/User.css";
 import SubmitButton from '../../components/SubmitButton.jsx';
-import LinkButton from '../../components/LinkButton.jsx';
+import CustomButton from '../../components/CustomButton.jsx';
 
-const LogIn = () => {
+const LogIn = (props) => {
+
+  const navigate = useNavigate();
   // State to manage form input values
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
+  const userData = {
+    userId: id,
+    userPassword: password,
+  };
 
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can use id and password values here to send a request to your backend
     console.log('Submitting:', { id, password });
-    // Example: You might want to send a POST request to login
-    // fetch('/loginProcess', {
-    //   method: 'POST',
-    //   body: JSON.stringify({ id, password }),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // })
-    // .then(response => response.json())
-    // .then(data => console.log(data))
-    // .catch(error => console.error('Error:', error));
+    fetch('http://localhost:3001/api/login', { 
+      method: "post", 
+      headers: {      
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userData), //userData 객체 전송 
+    })
+      .then((res) => res.json())
+      .then((json) => {            
+        if(json.isLogin==="True"){
+          localStorage.setItem('userID', id);
+          navigate('/');
+          window.location.reload();
+        }
+        else {
+          alert(json.isLogin)
+        }
+      });
   };
 
   return (
@@ -54,7 +66,13 @@ const LogIn = () => {
         <div className="footer-text">
           아직 계정이 없으신가요?
         </div>
-        <LinkButton to="/signup" text="회원가입" />
+        <CustomButton
+          text={'회원가입'}
+          textColor={'#fff'}
+          innerColor={'#59696C'}
+          borderColor={'#2C2C2C'}
+          onClick={() => navigate('/signup')}
+        />
       </form>
     </div>
   );

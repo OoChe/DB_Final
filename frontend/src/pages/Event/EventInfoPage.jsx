@@ -25,9 +25,11 @@ function EventInfo() {
       <div className="event-text">
         <h1 className="event-title">{eventData.title}</h1>
         <h2 className="event-subtitle">{eventData.subtitle}</h2>
-        {[...Array(5)].map((_, index) => (
-            <span key={index} className={`star ${index < eventData.rating ? "filled" : ""}`}>★</span>
-          ))}
+        <div className="star-list">
+          {[...Array(5)].map((_, index) => (
+              <span key={index} className={`star ${index < eventData.rating ? "filled" : ""}`}>★</span>
+            ))}
+        </div>
         <div className="event-rating">
           <p>
             평균 별점 : {eventData.rating} ({eventData.reviews})

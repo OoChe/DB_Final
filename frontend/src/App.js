@@ -11,7 +11,6 @@ import TopDestinations from './pages/TopDestinationsPage'; // 인기 여행지 �
 import BookAccommodation from './pages/Hotel/BookHotelPage'; // 숙소 예약 페이지 컴포넌트
 import RegisterAccommodation from './pages/Hotel/RegisterHotelPage'; // 숙소 등록 페이지 컴포넌트
 import Header from '../src/components/Header.jsx';
-import ModifyUserInfo from '../src/pages/User/ModifyUserInfo.jsx';
 
 function App() {
   return (
@@ -39,3 +38,42 @@ function App() {
 }
 
 export default App;
+
+// import React, { useEffect, useState } from 'react';
+
+// function App() {
+  const [events, setEvents] = useState([]);
+
+  // // 백엔드에서 데이터를 가져오는 함수
+  // const fetchEvents = async () => {
+  //   try {
+  //     const response = await fetch('http://localhost:3001/api/events'); // Node.js API 호출
+  //     // 3306 -> 3000 수정해야 API 호출 실패 안 뜸 
+  //     const data = await response.json(); // JSON 데이터를 파싱
+  //     setEvents(data); // 상태에 저장
+  //   } catch (error) {
+  //     console.error('API 호출 실패:', error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchEvents(); // 컴포넌트가 마운트되면 호출
+  // }, []);
+
+//   return (
+//     <div>
+//       <h1>이벤트 목록</h1>
+//       <ul>
+//         {events.map((event) => (
+//           <li key={event.ID}>
+//             <h3>{event.eventTitle}</h3>
+//             <p>{event.eventSubTitle}</p>
+//             <p>{event.eventRegion}</p>
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+
+// export default App;

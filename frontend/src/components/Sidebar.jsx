@@ -54,7 +54,7 @@ function FilterSidebar({ selectedRegion, setSelectedRegion, selectedMonth, setSe
 
   return (
     <div className="filter-sidebar">
-      <h3>지역 행사 찾기</h3>
+      <h3 className="filter-title">지역 행사 찾기</h3>
       <div className="filter-tags">
       {regions.map((region) => (
         <TagButton

@@ -7,6 +7,7 @@
     width: 95%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     cursor: pointer;
+    position: relative;
   }
   
   .image {
@@ -27,6 +28,7 @@
     margin: 0 0 2px;
     font-size: 18px;
     font-weight: bold;
+    font-family: TheJamsil-ExtraBold;
   }
   
   .subtitle {
@@ -45,11 +47,15 @@
   }
   
   .icon {
-    margin-left: 16px;
+    margin-left: auto;
     font-size: 20px;
     color: gray;
     transition: color 0.2s ease;
     cursor: pointer;
+    position: absolute; /* 절대 위치 */
+  right: 16px; /* 오른쪽 끝으로 위치 */
+  top: 50%; /* 세로 중앙 */
+  transform: translateY(-50%); /* 세로 중앙 정렬 */
   }
   
   .icon.clicked {
