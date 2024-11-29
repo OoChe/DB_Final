@@ -67,10 +67,6 @@ function HotelInfoPage() {
             </tbody>
           </table>
         </div>
-
-        <a href='#' className='detail-link'>
-          더 자세한 정보를 보고 싶다면? 사이트로 이동
-        </a>
       </div>
       <div className='hotel-reservation'>
         <Reservation hotelData={hotelData} />
