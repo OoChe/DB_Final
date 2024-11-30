@@ -17,7 +17,6 @@ function HotelList({ selectedRegion = '전체' }) {
     if (selectedRegion && selectedRegion !== '전체') {
       return hotel.hotelRegion === selectedRegion;
     }
-
     return true; // '전체'일 경우 모든 호텔 포함
   });
 
@@ -32,17 +31,13 @@ function HotelList({ selectedRegion = '전체' }) {
     return 0;
   });
 
-  if (!hotelList || !Array.isArray(hotelList)) {
-    console.log(hotelList);
-    return <div>데이터를 불러오는 중입니다...</div>;
-  }
-
   const fetchHotels = async () => {
     try {
       const response = await fetch('http://localhost:3001/api/hotel'); // Node.js API 호출
       // 3306 -> 3000 수정해야 API 호출 실패 안 뜸
       const data = await response.json(); // JSON 데이터를 파싱
       setHotelList(data); // 상태에 저장
+      console.log(hotelList);
     } catch (error) {
       console.error('API 호출 실패:', error);
     }
@@ -54,38 +49,44 @@ function HotelList({ selectedRegion = '전체' }) {
 
   return (
     <div className='hotel-list'>
-      <hr></hr>
-      <div className='sort-options'>
-        <span
-          className={sortOption === 'latest' ? 'active' : ''}
-          onClick={() => handleSortChange('latest')}
-        >
-          최신순
-        </span>
-        <span
-          className={sortOption === 'rating' ? 'active' : ''}
-          onClick={() => handleSortChange('rating')}
-        >
-          별점순
-        </span>
-      </div>
-      <hr></hr>
-      <div className='hotel-item-list'>
-        {sortedHotels.map((hotel) => (
-          <Link
-            key={hotel.id}
-            to={`/hotel/${hotel.hotelID}`}
-            style={{ textDecoration: 'none', color: 'inherit' }}
-          >
-            <HotelCard
-              hotelID={hotel.hotelID}
-              hotelName={hotel.hotelName}
-              hotelRegion={hotel.hotelRegion}
-              hotelOwnerName={hotel.hotelOwnerName}
-            />
-          </Link>
-        ))}
-      </div>
+      {!hotelList || !Array.isArray(hotelList) ? (
+        <div>데이터를 불러오는 중입니다...</div>
+      ) : (
+        <>
+          <hr></hr>
+          <div className='sort-options'>
+            <span
+              className={sortOption === 'latest' ? 'active' : ''}
+              onClick={() => handleSortChange('latest')}
+            >
+              최신순
+            </span>
+            <span
+              className={sortOption === 'rating' ? 'active' : ''}
+              onClick={() => handleSortChange('rating')}
+            >
+              별점순
+            </span>
+          </div>
+          <hr></hr>
+          <div className='hotel-item-list'>
+            {sortedHotels.map((hotel) => (
+              <Link
+                key={hotel.hotelID}
+                to={`/hotel/${hotel.hotelID}`}
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <HotelCard
+                  hotelID={hotel.hotelID}
+                  hotelName={hotel.hotelName}
+                  hotelRegion={hotel.hotelRegion}
+                  hotelOwnerName={hotel.userName}
+                />
+              </Link>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

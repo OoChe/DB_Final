@@ -35,16 +35,12 @@ function RegionSection({ selectedRegion, setSelectedRegion }) {
       <div className='region-buttons'>
         {regions.map((region) => (
           <TagButton
+            key={region}
             text={region}
             onClick={() => handleTagClick('region', region)}
             isSelected={selectedRegion === region}
           />
         ))}
-        {/* {regions.map((region, index) => (
-          <span key={index} className="tag">
-            #{region}
-          </span>
-        ))} */}
       </div>
     </div>
   );

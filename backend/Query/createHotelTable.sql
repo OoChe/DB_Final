@@ -34,25 +34,20 @@ CREATE TABLE Reservation (
     FOREIGN KEY (userID) REFERENCES User(userID)
 );
 -- 호텔 데이터 생성
-INSERT INTO Hotel (HotelID, HotelName, hotelRegion, hotelAddress, hotelPrice, hotelOwnerID)
+INSERT INTO Hotel (HotelName, hotelRegion, hotelAddress, hotelPrice, hotelOwnerID)
 VALUES (
-    CONCAT('H', LPAD(AutoID + 1, 6, '0')), -- ID 생성 규칙: h + 숫자 6자리
     'E호텔',
     '서울',
     '서울특별시 서초구 반포대로18길 40 E 호텔',
     120000,
     'dongguki'
-);
-INSERT INTO Hotel (HotelName, hotelRegion, hotelAddress, hotelPrice, hotelOwnerID)
-VALUES (
+), (
     'JS호텔분당',
     '경기',
     '경기도 성남시 분당구 황새울로311번길 36',
     210000,
     'dongguki'
-);
-INSERT INTO Hotel (HotelName, hotelRegion, hotelAddress, hotelPrice, hotelOwnerID)
-VALUES (
+), (
     '로얄엠포리움호텔',
     '인천',
     '인천광역시 중구 중산동 1951-5',
@@ -69,6 +64,12 @@ VALUES (
     '제주',
     '제주특별자치도 서귀포시 서호중로 55',
     180000,
+    'dongguki'
+), (
+    '밸류호텔월드와이드부산',
+    '부산',
+    '부산광역시 영도구 대교동1가 40	',
+    280000,
     'dongguki'
 );
 -- 트리거를 활용한 자동 호텔 값 생성
@@ -95,4 +96,3 @@ DELIMITER ;
 FROM Hotel h
 LEFT JOIN Review r ON h.hotelID = r.hotelID
 GROUP BY h.hotelID, h.hotelName;
-

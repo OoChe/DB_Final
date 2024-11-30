@@ -1,5 +1,5 @@
 /* [행사 하나의 상세 정보를 보여주는 페이지] */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import renderStars from '../../components/StarFilled';
 import Reservation from '../../components/Reservation';
@@ -8,27 +8,51 @@ import '../../styles/Hotel.css';
 
 function HotelInfoPage() {
   const { id } = useParams(); // URL에서 이벤트 ID 추출
+  const [hotelData, setHotelData] = useState(null); // 호텔 데이터를 저장할 상태
+  const [loading, setLoading] = useState(true); // 로딩 상태
+  const [error, setError] = useState(null); // 에러 상태
 
-  const hotelData = {
-    title: '숙소 이름',
-    rating: 3.7,
-    reviews: 12,
-    region: '서울',
-    owner: '동국이',
-    location: '서울특별시 중구 필동로 1길 30',
-    tourspot: ['관광지1', '관광지2', '관광지3'],
-    hotelPrice: 10000, // 숙소 가격 추가
-    reservedDates: [],
-  };
+  // 호텔 데이터를 가져오는 함수
+  useEffect(() => {
+    const fetchHotelDetails = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/api/hotel/${id}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch hotel data');
+        }
+        const data = await response.json();
+        setHotelData(data); // 상태에 데이터 저장
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchHotelDetails(); // 컴포넌트가 마운트될 때 데이터 가져오기
+  }, [id]);
+
+  if (loading) {
+    return <div>데이터를 불러오는 중입니다...</div>;
+  }
+
+  if (error) {
+    return <div>에러 발생: {error}</div>;
+  }
+
+  if (!hotelData) {
+    return <div>호텔 정보를 찾을 수 없습니다.</div>;
+  }
 
   return (
     <div className='hotel-info-container'>
       <div className='hotel-text'>
-        <h1 className='hotel-title'>{hotelData.title}</h1>
-        <div className='stars-wrapper'>{renderStars(hotelData.rating)}</div>
+        <h1 className='hotel-title'>{hotelData.hotelName}</h1>
+        <div className='stars-wrapper'>{renderStars(hotelData.hotelRate)}</div>
         <div className='hotel-rating'>
           <p>
-            평균 별점 : {hotelData.rating} ({hotelData.reviews})
+            평균 별점 : {hotelData.hotelRate} ({hotelData.hotelRate})
           </p>
           <button className='review-button'>후 기</button>
         </div>
@@ -40,29 +64,31 @@ function HotelInfoPage() {
                 <td>
                   <strong>지역:</strong>
                 </td>
-                <td>{hotelData.region}</td>
+                <td>{hotelData.hotelRegion}</td>
               </tr>
               <tr>
                 <td>
                   <strong>호스트:</strong>
                 </td>
-                <td>{hotelData.owner}</td>
+                <td>{hotelData.hotelOwnerName}</td>
               </tr>
               <tr>
                 <td>
                   <strong>위치:</strong>
                 </td>
-                <td>{hotelData.location}</td>
+                <td>{hotelData.hotelAddress}</td>
               </tr>
               <tr>
                 <td>
                   <strong>주변 관광지:</strong>
                 </td>
-                {hotelData.tourspot.map((spot, index) => (
-                  <tr key={index}>
-                    <td>{spot}</td>
-                  </tr>
-                ))}
+                {hotelData.tourSpot
+                  ? hotelData.tourspot.map((spot, index) => (
+                      <tr key={index}>
+                        <td>{spot}</td>
+                      </tr>
+                    ))
+                  : null}
               </tr>
             </tbody>
           </table>
