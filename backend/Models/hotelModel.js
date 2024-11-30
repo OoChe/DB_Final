@@ -30,7 +30,7 @@ const fetchHotelById = (hotelID) => {
     h.hotelAddress, 
     h.hotelPrice, 
     u.userName AS hotelOwnerName, 
-    AVG(r.Rating) AS hotelRate
+    ROUND(IFNULL(AVG(r.Rating), 0), 1) AS hotelRate
 FROM Hotel h
 LEFT JOIN User u 
     ON h.hotelOwnerID = u.userID

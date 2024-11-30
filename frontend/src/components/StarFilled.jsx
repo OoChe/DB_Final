@@ -3,8 +3,7 @@ import '../styles/StarFilled.css';
 
 function renderStars(rating) {
   // 전달받은 rating이 null이거나 유효하지 않은 값일 경우 0으로 처리
-  const roundedRating = rating ? parseFloat(rating.toFixed(1)) : 0;
-
+  const roundedRating = rating ? parseFloat(parseFloat(rating).toFixed(1)) : 0;
   return [...Array(5)].map((_, index) => {
     const diff = roundedRating - index;
 
