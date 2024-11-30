@@ -45,6 +45,39 @@ function Reservation({ hotelData }) {
     setTotalPrice(calculateTotal(checkIn, checkOut, updatedGuests));
   };
 
+  const handleReservation = async () => {
+    const loggedInUserID = localStorage.getItem('userID');
+    if (!loggedInUserID) {
+      alert('로그인 후 이용 가능합니다.');
+      return;
+    }
+    const reservationData = {
+      hotelID: hotelData.hotelID,
+      checkInDate: checkIn,
+      checkOutDate: checkOut,
+      reserveNum: guests,
+      userID: loggedInUserID,
+    };
+
+    try {
+      const response = await fetch('http://localhost:3001/api/hotel/reserve', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(reservationData),
+      });
+
+      if (response.ok) {
+        alert('예약이 완료되었습니다.');
+      } else {
+        const errorData = await response.json();
+        alert(`예약 실패: ${errorData.message}`);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('서버 오류로 인해 예약에 실패했습니다.');
+    }
+  };
+
   return (
     <div className='reservation-container'>
       <p className='price-info'>
@@ -81,7 +114,9 @@ function Reservation({ hotelData }) {
         </div>
       </div>
       <p className='total-price'>총금액 {totalPrice.toLocaleString()} 원</p>
-      <button className='reserve-button'>예약하기</button>
+      <button className='reserve-button' onClick={handleReservation}>
+        예약하기
+      </button>
     </div>
   );
 }

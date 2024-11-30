@@ -1,4 +1,5 @@
 const { fetchHotelList, fetchHotelById } = require('../Models/hotelModel');
+const { saveReservation } = require('../Models/hotelModel');
 
 const getHotels = async (req, res) => {
   try {
@@ -30,5 +31,22 @@ const getHotelDetails = async (req, res) => {
       res.status(500).json({ error: 'Server error' });
     }
   };
-
-module.exports = { getHotels, getHotelDetails };
+  
+  // 
+  const makeReservation = async (req, res) => {
+    const { hotelID, checkInDate, checkOutDate, reserveNum, userID } = req.body;
+  
+    if (!hotelID || !checkInDate || !checkOutDate || !reserveNum || !userID) {
+      return res.status(400).json({ message: '모든 필드를 입력해주세요.' });
+    }
+  
+    try {
+      await saveReservation(hotelID, checkInDate, checkOutDate, reserveNum, userID);
+      res.status(201).json({ message: '예약이 성공적으로 완료되었습니다.' });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: '예약 중 오류가 발생했습니다.' });
+    }
+  };
+  
+module.exports = { getHotels, getHotelDetails, makeReservation };

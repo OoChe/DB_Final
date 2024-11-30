@@ -24,15 +24,16 @@ CREATE TABLE Hotel_TouristSpot (
 );
 -- 숙소 예약 테이블
 CREATE TABLE Reservation (
-    reserveID INT PRIMARY KEY AUTO_INCREMENT,
-    hotelID VARCHAR(10),
-    reserveDate DATE NOT NULL,
-    reservePeriod INT NOT NULL, -- 예약 기간 (일 단위)
-    reserveNum INT NOT NULL,   -- 예약 인원
-    userID VARCHAR(20),
+    reserveID INT PRIMARY KEY AUTO_INCREMENT, -- 예약 ID
+    hotelID VARCHAR(10) NOT NULL,             -- 숙소 ID
+    checkInDate DATE NOT NULL,                -- 체크인 날짜
+    checkOutDate DATE NOT NULL,               -- 체크아웃 날짜
+    reserveNum INT NOT NULL,                  -- 예약 인원
+    userID VARCHAR(20) NOT NULL,              -- 예약한 사용자
     FOREIGN KEY (hotelID) REFERENCES Hotel(hotelID),
     FOREIGN KEY (userID) REFERENCES User(userID)
 );
+
 -- 호텔 데이터 생성
 INSERT INTO Hotel (HotelName, hotelRegion, hotelAddress, hotelPrice, hotelOwnerID)
 VALUES (
@@ -90,9 +91,3 @@ BEGIN
 END$$
 
 DELIMITER ;
-
--- 평균 후기 값 가져오는 쿼리문
-    SELECT h.hotelID, h.hotelName, AVG(r.rateInfo) AS hotelRate
-FROM Hotel h
-LEFT JOIN Review r ON h.hotelID = r.hotelID
-GROUP BY h.hotelID, h.hotelName;

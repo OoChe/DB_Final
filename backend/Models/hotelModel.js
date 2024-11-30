@@ -54,4 +54,26 @@ GROUP BY
   });
 };
 
-module.exports = { fetchHotelList, fetchHotelById };
+// 예약 정보 저장 쿼리 함수
+const saveReservation = async (
+  hotelID,
+  checkInDate,
+  checkOutDate,
+  reserveNum,
+  userID
+) => {
+  const query = `
+    INSERT INTO Reservation (hotelID, checkInDate, checkOutDate, reserveNum, userID)
+    VALUES (?, ?, ?, ?, ?)
+  `;
+
+  await db.query(query, [
+    hotelID,
+    checkInDate,
+    checkOutDate,
+    reserveNum,
+    userID,
+  ]);
+};
+
+module.exports = { fetchHotelList, fetchHotelById, saveReservation };
