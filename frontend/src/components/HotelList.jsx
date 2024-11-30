@@ -23,10 +23,10 @@ function HotelList({ selectedRegion = '전체' }) {
   const sortedHotels = [...filteredHotels].sort((a, b) => {
     if (sortOption === 'latest') {
       // 최신순 정렬 (startDate 기준)
-      return new Date(b.startDate) - new Date(a.startDate);
+      return 0;
     } else if (sortOption === 'rating') {
       // 별점순 정렬 (rating 기준)
-      return b.rating - a.rating;
+      return parseFloat(b.hotelRate) - parseFloat(a.hotelRate);
     }
     return 0;
   });

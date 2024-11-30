@@ -25,8 +25,10 @@ function RegionSection({ selectedRegion, setSelectedRegion }) {
   ];
   const handleTagClick = (type, value) => {
     console.log('Tag clicked: ', type, value);
-    if (type === 'region')
-      setSelectedRegion(value === selectedRegion ? null : value); // 같은 탭 클릭 시 선택 해제
+    if (type === 'region') {
+      // selectedRegion이 이미 선택되어 있으면 아무 일도 하지 않도록 처리
+      if (value !== selectedRegion) setSelectedRegion(value);
+    }
   };
 
   return (

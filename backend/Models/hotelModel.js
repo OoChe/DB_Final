@@ -4,14 +4,16 @@ const db = require('../Configs/db');
 const fetchHotelList = () => {
   return new Promise((resolve, reject) => {
     const query = `
-      SELECT 
-        Hotel.hotelID, 
-        Hotel.hotelName, 
-        Hotel.hotelRegion, 
-        User.userName
-      FROM Hotel
-      LEFT JOIN User
-      ON Hotel.hotelOwnerID = User.userID;
+    SELECT
+      h.hotelID,
+      h.hotelName,
+      h.hotelRegion,
+      ROUND(IFNULL(AVG(r.Rating), 0), 1) AS hotelRate,
+      u.UserName
+    FROM Hotel h
+    LEFT JOIN User u ON h.hotelOwnerID = u.userID
+    LEFT JOIN HotelReview r ON h.hotelID = r.hotelID
+    GROUP BY h.hotelID, h.hotelName, h.hotelRegion, u.UserName;
     `;
     db.query(query, (err, results) => {
       if (err) reject(err);
