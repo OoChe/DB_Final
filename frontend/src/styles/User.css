@@ -10,6 +10,7 @@ body {
 .title-center {
     font-size: 40px;
     text-align: center;
+    font-family: TheJamsil-ExtraBold;
 }
 
 .form-container {
@@ -17,6 +18,7 @@ body {
     justify-content: center;     /* 가로 중앙 정렬 */
     align-items: center;         /* 세로 중앙 정렬 */                /* 너비를 60%로 설정 */
     flex-direction: column;
+    margin-top: 50px;
 }
 
 .form-group {
@@ -37,6 +39,8 @@ body {
 
 .footer-text {
     margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
     font-size: 12px;
     color: #777;
 }

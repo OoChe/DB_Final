@@ -4,13 +4,16 @@ import LogIn from '../src/pages/User/LogIn.jsx';
 import SignUp from '../src/pages/User/SignUp.jsx';
 import EventPage from './pages/Event/EventPage.jsx';
 import EventInfo from '../src/pages/Event/EventInfo.jsx';
+import EventReview from '../src/pages/Event/EventReview.jsx';
 import MyPage from '../src/pages/User/MyPage.jsx';
+import MyReview from '../src/pages/User/MyReview.jsx';
 import ModifyUserInfo from '../src/pages/User/ModifyUserInfo.jsx';
 import HotelPage from './pages/Hotel/HotelPage'; // 숙소 페이지 컴포넌트
 import HotelInfoPage from './pages/Hotel/HotelInfoPage';
 import TopDestinations from './pages/TopDestinationsPage'; // 인기 여행지 페이지 컴포넌트
 import EnrollHotelPage from './pages/Hotel/EnrollHotelPage'; // 숙소 등록 페이지 컴포넌트
 import Header from '../src/components/Header.jsx';
+
 
 function App() {
   return (
@@ -32,6 +35,9 @@ function App() {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/modifyUserInfo' element={<ModifyUserInfo />} />
         <Route path='/mypage' element={<MyPage />} />
+        <Route path='/myReview' element={<MyReview />} />
+        {/* 이벤트 후기 페이지 */}
+        <Route path='/event/:id/eventReview' element={<EventReview />} />
       </Routes>
     </Router>
   );

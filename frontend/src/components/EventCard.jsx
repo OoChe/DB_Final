@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../styles/EventCard.css'; 
 import { useState } from 'react';
 
-const EventCard = ({ id, title, subtitle, startDate, keywords }) => {
+const EventCard = ({ id, title, region, date, description }) => {
 
   const [clicked, setClicked] = useState(false);
   
@@ -17,9 +17,10 @@ const EventCard = ({ id, title, subtitle, startDate, keywords }) => {
       <div className = "image"></div>
       <div className = "content">
       <h3 className="title">{title}</h3>
-        <p className="subtitle">{subtitle}</p>
-        <p className="date">{startDate}</p>
-        <p className="keyword">{keywords.join(', ')}</p>
+        <p className="subtitle">{region}</p>
+        <p className="date">{date}</p>
+        <p className="date">{description}</p>
+        {/* <p className="keyword">{keywords.join(', ')}</p> */}
       </div>
       {/* <Link to={`/event/${id}`} className="view-details">View Details</Link> */}
       <div
