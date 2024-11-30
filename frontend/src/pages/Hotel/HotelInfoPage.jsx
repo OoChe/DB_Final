@@ -82,10 +82,10 @@ function HotelInfoPage() {
                 <td>
                   <strong>주변 관광지:</strong>
                 </td>
-                {hotelData.tourSpot
-                  ? hotelData.tourspot.map((spot, index) => (
+                {hotelData.tourspot
+                  ? hotelData.tourspot.split(',').map((spot, index) => (
                       <tr key={index}>
-                        <td>{spot}</td>
+                        <td>{spot.trim()}</td> {/* trim()으로 앞뒤 공백 제거 */}
                       </tr>
                     ))
                   : null}

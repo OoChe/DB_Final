@@ -80,7 +80,7 @@ function HotelList({ selectedRegion = '전체' }) {
                   hotelID={hotel.hotelID}
                   hotelName={hotel.hotelName}
                   hotelRegion={hotel.hotelRegion}
-                  hotelOwnerName={hotel.userName}
+                  hotelOwnerName={hotel.UserName}
                 />
               </Link>
             ))}
