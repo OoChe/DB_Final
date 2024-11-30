@@ -62,25 +62,30 @@ const fetchHotelById = (hotelID) => {
 };
 
 // 예약 정보 저장 쿼리 함수
-const saveReservation = async (
+const saveReservation = (
   hotelID,
   checkInDate,
   checkOutDate,
   reserveNum,
-  userID
+  userID,
+  callback
 ) => {
   const query = `
     INSERT INTO Reservation (hotelID, checkInDate, checkOutDate, reserveNum, userID)
     VALUES (?, ?, ?, ?, ?)
   `;
 
-  await db.query(query, [
-    hotelID,
-    checkInDate,
-    checkOutDate,
-    reserveNum,
-    userID,
-  ]);
+  db.query(
+    query,
+    [hotelID, checkInDate, checkOutDate, reserveNum, userID],
+    (err, results) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, results); // 성공 시 결과 반환
+      }
+    }
+  );
 };
 
 module.exports = { fetchHotelList, fetchHotelById, saveReservation };

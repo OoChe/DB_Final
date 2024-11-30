@@ -60,11 +60,14 @@ function Reservation({ hotelData }) {
     };
 
     try {
-      const response = await fetch('http://localhost:3001/api/hotel/reserve', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(reservationData),
-      });
+      const response = await fetch(
+        `http://localhost:3001/api/hotel/${hotelData.hotelID}/reserve`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(reservationData),
+        }
+      );
 
       if (response.ok) {
         alert('예약이 완료되었습니다.');
