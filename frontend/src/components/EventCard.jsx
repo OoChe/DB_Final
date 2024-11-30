@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../styles/EventCard.css'; 
 import { useState } from 'react';
 
-const EventCard = ({ id, title, region, date, description }) => {
+const EventCard = ({ id, title, region, date, description, imgUrl }) => {
 
   const [clicked, setClicked] = useState(false);
   
@@ -14,7 +14,13 @@ const EventCard = ({ id, title, region, date, description }) => {
 
   return (
     <div className = "card">
-      <div className = "image"></div>
+      <div className = "image">
+      {imgUrl ? (
+          <img src={imgUrl} alt="Event" />
+        ) : (
+          <div className="placeholder"></div>
+        )}
+      </div>
       <div className = "content">
       <h3 className="title">{title}</h3>
         <p className="subtitle">{region}</p>

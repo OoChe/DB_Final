@@ -96,8 +96,8 @@ useEffect(() => {
         <a href={eventData.EventURL} className="detail-link">더 자세한 정보를 보고 싶다면? 사이트로 이동</a>
       </div>
       <div className="event-image">
-        {eventData.imageUrl ? (
-          <img src={eventData.imageUrl} alt="Event" />
+        {eventData.ImgUrl ? (
+          <img src={eventData.ImgUrl} alt="Event" />
         ) : (
           <div className="placeholder">이미지</div>
         )}

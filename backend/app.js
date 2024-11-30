@@ -28,7 +28,8 @@ app.get('/api/events', (req, res) => {
 app.get('/api/events/:id', (req, res) => {
   const eventId = req.params.id;  // URL 파라미터에서 ID를 가져옴
   //const query = 'SELECT * FROM Event WHERE EventID = ?';  // 이벤트 ID로 쿼리
-  const query = 'SELECT e.EventID, e.EventTitle, e.EventSubtitle, e.Region, e.EventDate, e.Address, e.EventDescription, e.EventURL, COALESCE(ROUND(AVG(r.Rating), 2), 0) AS AvgRating, COUNT(r.ReviewID) AS ReviewCount FROM Event e LEFT JOIN EventReview r ON e.EventID = r.EventID WHERE e.EventID = ?';
+  //const query = 'SELECT e.EventID, e.EventTitle, e.EventSubtitle, e.Region, e.EventDate, e.Address, e.EventDescription, e.EventURL, COALESCE(ROUND(AVG(r.Rating), 2), 0) AS AvgRating, COUNT(r.ReviewID) AS ReviewCount FROM Event e LEFT JOIN EventReview r ON e.EventID = r.EventID WHERE e.EventID = ?';
+  const query = 'SELECT e.EventID, e.EventTitle, e.EventSubtitle, e.Region, e.EventDate, e.Address, e.EventDescription, e.EventURL, e.ImgUrl, COALESCE(ROUND(AVG(r.Rating), 2), 0) AS AvgRating, COUNT(r.ReviewID) AS ReviewCount FROM Event e LEFT JOIN EventReview r ON e.AutoID = r.EventID WHERE e.AutoID = ?';
   console.log('Event details 백엔드 호출', eventId);
   db.query(query, [eventId], (err, results) => {
     if (err) {
@@ -42,14 +43,6 @@ app.get('/api/events/:id', (req, res) => {
     }
   });
 });
-
-app.use(session({  
-	//key: 'session_cookie_name',
-  secret: '0000',
-	resave: false,
-	saveUninitialized: true,
-  cookie: { secure: false, sameSite: 'lax' }
-}))
 
 // 로그인
 app.post('/api/login', (req, res) => { // 데이터 받아서 결과 전송
@@ -212,7 +205,8 @@ app.post('/api/review', (req, res) => {
 // 리뷰 불러오기
 app.get('/api/reviews/:id', (req, res) => {
   const eventId = req.params.id;  // URL 파라미터에서 ID를 가져옴
-  const queryRate = 'SELECT AVG(Rating) AS AvgRating, COUNT(*) AS ReviewCount FROM EventReview WHERE EventID = ?'
+  //const queryRate = 'SELECT AVG(Rating) AS AvgRating, COUNT(*) AS ReviewCount FROM EventReview WHERE EventID = ?'
+  const queryRate = 'SELECT AVG(Rating) AS AvgRating, COUNT(*) AS ReviewCount FROM EventReview WHERE EventID = ?';
   const query = 'SELECT * FROM EventReview WHERE EventID = ?';  // 이벤트 ID로 쿼리
   console.log('Event Review 백엔드 호출', eventId);
 
@@ -303,8 +297,8 @@ app.post("/api/bookmarks", (req, res) => {
     COALESCE(e.Region, h.hotelRegion) AS Region
     FROM 
     Bookmark b
-    LEFT JOIN Event e ON b.EventID = e.EventID
-    LEFT JOIN Hotel h ON b.HotelID = h.HotelID
+    LEFT JOIN Event e ON b.EventID = e.AutoID
+    LEFT JOIN Hotel h ON b.HotelID = h.AutoID
     WHERE UserID = ?;
   `;
   
