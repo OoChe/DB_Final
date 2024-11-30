@@ -9,9 +9,9 @@ import MyPage from '../src/pages/User/MyPage.jsx';
 import MyReview from '../src/pages/User/MyReview.jsx';
 import ModifyUserInfo from '../src/pages/User/ModifyUserInfo.jsx';
 import HotelPage from './pages/Hotel/HotelPage'; // 숙소 페이지 컴포넌트
+import HotelInfoPage from './pages/Hotel/HotelInfoPage';
 import TopDestinations from './pages/TopDestinationsPage'; // 인기 여행지 페이지 컴포넌트
-import BookAccommodation from './pages/Hotel/BookHotelPage'; // 숙소 예약 페이지 컴포넌트
-import RegisterAccommodation from './pages/Hotel/RegisterHotelPage'; // 숙소 등록 페이지 컴포넌트
+import EnrollHotelPage from './pages/Hotel/EnrollHotelPage'; // 숙소 등록 페이지 컴포넌트
 import Header from '../src/components/Header.jsx';
 
 
@@ -28,9 +28,9 @@ function App() {
         <Route path='/event/:id' element={<EventInfo />} />
         {/* 이벤트 상세 페이지 */}
         <Route path='/hotel' element={<HotelPage />} />
+        <Route path='/hotel/:id' element={<HotelInfoPage />} />
         <Route path='/top-destinations' element={<TopDestinations />} />
-        <Route path='/bookhotel' element={<BookAccommodation />} />
-        <Route path='/registerhotel' element={<RegisterAccommodation />} />
+        <Route path='/enrollhotel' element={<EnrollHotelPage />} />
         <Route path='/login' element={<LogIn />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/modifyUserInfo' element={<ModifyUserInfo />} />

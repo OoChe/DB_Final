@@ -1,5 +1,5 @@
 /* [헤더 컴포넌트]
-*/
+ */
 import React, { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Header.css';
@@ -54,24 +54,23 @@ function Header() {
     { label: '행사', path: '/event' },
     { label: '숙소', path: '/hotel' },
     { label: '인기 여행지 TOP 10', path: '/top-destinations' },
-    { label: '숙소 예약', path: '/bookhotel' },
-    { label: '숙소 등록', path: '/registerhotel' },
+    { label: '숙소 등록', path: '/enrollhotel' },
   ];
 
   return (
-    <div className="header-container">
+    <div className='header-container'>
       {/* 메뉴 섹션 */}
-      <div className="title-text" onClick={() => navigate('/')}>
+      <div className='title-text' onClick={() => navigate('/')}>
         Travel Guide
       </div>
-      <div className="header-menu">
+      <div className='header-menu'>
         {menuItems.map((item) => (
           <div
             key={item.label}
-            className="menu-item"
+            className='menu-item'
             onClick={() => navigate(item.path)}
           >
-            <p className="menu-text">{item.label}</p>
+            <p className='menu-text'>{item.label}</p>
           </div>
         ))}
       </div>

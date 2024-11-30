@@ -1,0 +1,102 @@
+/* 전체 컨테이너 */
+.top-destination-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  padding-inline: 100px;
+  font-family: 'TheJamsil-Regular';
+}
+
+/* 왼쪽 콘텐츠 */
+.top-destination-content {
+  width: 70%;
+}
+
+.page-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+.destination-section {
+  margin-bottom: 30px;
+}
+
+.destination-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.small-event-list {
+  display: flex;
+  gap: 10px;
+}
+
+.small-event-card {
+  width: 30%;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  padding: 10px;
+}
+
+.small-event-thumbnail {
+  width: 100%; /* 부모 요소에 따라 유동적인 너비 설정 */
+  height: 170px; /* 원하는 고정 높이 또는 유동 높이 설정 */
+  background-size: cover; /* 이미지를 요소 크기에 맞게 채움 */
+  background-position: center; /* 이미지를 중심으로 배치 */
+  background-repeat: no-repeat; /* 이미지 반복 방지 */
+  border-radius: 8px; /* 선택 사항: 둥근 테두리 추가 */
+  overflow: hidden; /* 선택 사항: 콘텐츠가 넘어갈 경우 숨김 */
+  margin-bottom: 20px;
+}
+
+.small-event-title {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.small-event-date {
+  font-size: 12px;
+  color: #666;
+}
+
+.view-more {
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.view-more:hover {
+  text-decoration: underline;
+}
+
+/* 오른쪽 사이드바 */
+.top-10-sidebar {
+  width: 25%;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-left: 40px;
+  padding: 15px;
+}
+
+.sidebar-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-item {
+  font-size: 14px;
+  margin-bottom: 10px;
+}

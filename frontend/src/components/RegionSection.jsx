@@ -1,24 +1,47 @@
-import React from "react";
+import React from 'react';
+import '../styles/Hotel.css';
+import TagButton from './TagButton';
 
-function RegionSection({ setRegion }) {
+function RegionSection({ selectedRegion, setSelectedRegion }) {
   const regions = [
-    "서울특별시",
-    "부산광역시",
-    "제주도",
-    "강원도",
-    "전라도",
-    "경상도",
-    "충청도",
+    '전체',
+    '서울',
+    '부산',
+    '대구',
+    '인천',
+    '광주',
+    '대전',
+    '울산',
+    '세종',
+    '경기',
+    '강원',
+    '충북',
+    '충남',
+    '전북',
+    '전남',
+    '경북',
+    '경남',
+    '제주',
   ];
+  const handleTagClick = (type, value) => {
+    console.log('Tag clicked: ', type, value);
+    if (type === 'region') {
+      // selectedRegion이 이미 선택되어 있으면 아무 일도 하지 않도록 처리
+      if (value !== selectedRegion) setSelectedRegion(value);
+    }
+  };
 
   return (
-    <div className="region-section">
-      <h3>지역별 숙소 찾기</h3>
-      <div className="region-buttons">
-        {regions.map((region, index) => (
-          <button key={index} onClick={() => setRegion(region)}>
-            {region}
-          </button>
+    <div className='region-section'>
+      <h3>지역 행사 찾기</h3>
+      <div className='region-buttons'>
+        {regions.map((region) => (
+          <TagButton
+            key={region}
+            text={region}
+            onClick={() => handleTagClick('region', region)}
+            isSelected={selectedRegion === region}
+          />
         ))}
       </div>
     </div>
