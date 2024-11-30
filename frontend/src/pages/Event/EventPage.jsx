@@ -14,7 +14,7 @@ const EventPage = ({ className, ...props }) => {
   return (
 
     <div className = "container">
-      <h1 className = "event-title">행사</h1>
+      <h1 className = "page-title">행사</h1>
       <div className="content">
         <EventList selectedRegion={selectedRegion} selectedMonth={selectedMonth} />
         <Sidebar 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Hotel.css';
 
-function HotelShort({ hotelName, hotelRegion, hotelOwnerName }) {
+function HotelCard({ hotelId, hotelName, hotelRegion, hotelOwnerName }) {
   const [clicked, setClicked] = useState(false);
 
   // 즐겨찾기 아이콘 상태 변경 함수
@@ -10,7 +10,7 @@ function HotelShort({ hotelName, hotelRegion, hotelOwnerName }) {
     setClicked(!clicked); // 클릭할 때마다 상태 변경
   };
   return (
-    <div className='accommodation-item'>
+    <div className='hotel-item'>
       <div>
         <p className='hotel-name'>{hotelName}</p>
         <p className='hotel-region'>{hotelRegion}</p>
@@ -26,4 +26,4 @@ function HotelShort({ hotelName, hotelRegion, hotelOwnerName }) {
   );
 }
 
-export default HotelShort;
+export default HotelCard;
