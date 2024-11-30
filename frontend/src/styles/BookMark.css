@@ -1,0 +1,46 @@
+.bookmark-list {
+    margin-top: 20px;
+    margin-left: 30px;
+  }
+  
+  .bookmark-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    text-align: left;
+    width: 300px;
+    height: 90px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .bookmark-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bookmark-title {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: TheJamsil-ExtraBold;
+  }
+
+  .bookmark-region {
+    margin-top: 1px;
+  }
+
+  .star-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    /* color: gray; */
+    color: gold;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .star-button.starred {
+    color: gold;
+  }

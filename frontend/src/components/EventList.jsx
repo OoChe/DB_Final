@@ -11,7 +11,6 @@ function EventList({ selectedRegion = '전체', selectedMonth = '전체'}) {
   const fetchEvents = async () => {
     try {
       const response = await fetch('http://localhost:3001/api/events'); // Node.js API 호출
-      // 3306 -> 3000 수정해야 API 호출 실패 안 뜸 
       const data = await response.json(); // JSON 데이터를 파싱
       setEvents(data); // 상태에 저장
     } catch (error) {

@@ -27,7 +27,8 @@ app.get('/api/events', (req, res) => {
 // 특정 이벤트의 상세 정보를 반환하는 API
 app.get('/api/events/:id', (req, res) => {
   const eventId = req.params.id;  // URL 파라미터에서 ID를 가져옴
-  const query = 'SELECT * FROM Event WHERE EventID = ?';  // 이벤트 ID로 쿼리
+  //const query = 'SELECT * FROM Event WHERE EventID = ?';  // 이벤트 ID로 쿼리
+  const query = 'SELECT e.EventID, e.EventTitle, e.EventSubtitle, e.Region, e.EventDate, e.Address, e.EventDescription, e.EventURL, COALESCE(ROUND(AVG(r.Rating), 2), 0) AS AvgRating, COUNT(r.ReviewID) AS ReviewCount FROM Event e LEFT JOIN EventReview r ON e.EventID = r.EventID WHERE e.EventID = ?';
   console.log('Event details 백엔드 호출', eventId);
   db.query(query, [eventId], (err, results) => {
     if (err) {
@@ -163,6 +164,173 @@ app.post('/api/updateUserInfo', (req, res) => {
   );
 });
 
+// 회원 탈퇴 API
+app.post('/api/unregister', (req, res) => {
+  const { userID } = req.body;
+  console.log("탈퇴", userID)
+
+  // 유효한 userID가 있는지 확인
+  if (!userID) {
+    return res.status(400).json({ isSuccess: "False", message: "유효하지 않은 사용자 ID입니다." });
+  }
+
+  // 데이터베이스에서 사용자 정보 삭제
+  const query = 'DELETE FROM User WHERE UserID = ?';
+
+  db.query(query, [userID], (err, result) => {
+    if (err) {
+      console.error('탈퇴 처리 중 오류 발생:', err);
+      return res.status(500).json({ isSuccess: "False", message: "회원 탈퇴 처리 중 오류가 발생했습니다." });
+    }
+
+    // 사용자 삭제 성공
+    if (result.affectedRows > 0) {
+      return res.json({ isSuccess: "True", message: "회원 탈퇴가 완료되었습니다." });
+    } else {
+      return res.status(404).json({ isSuccess: "False", message: "사용자를 찾을 수 없습니다." });
+    }
+  });
+});
+
+// 리뷰 작성 
+app.post('/api/review', (req, res) => {
+  const { userID, id, rating, content } = req.body;
+  console.log(userID)
+  const query = `
+      INSERT INTO EventReview (UserID, EventID, Rating, Content)
+      VALUES (?, ?, ?, ?)
+  `;
+  db.query(query, [userID, id, rating, content], (err, result) => {
+      if (err) {
+          console.error(err);
+          return res.status(500).send('Error inserting review');
+      }
+      res.status(201).json({ message: 'Review added successfully' });
+  });
+});
+
+// 리뷰 불러오기
+app.get('/api/reviews/:id', (req, res) => {
+  const eventId = req.params.id;  // URL 파라미터에서 ID를 가져옴
+  const queryRate = 'SELECT AVG(Rating) AS AvgRating, COUNT(*) AS ReviewCount FROM EventReview WHERE EventID = ?'
+  const query = 'SELECT * FROM EventReview WHERE EventID = ?';  // 이벤트 ID로 쿼리
+  console.log('Event Review 백엔드 호출', eventId);
+
+  db.query(queryRate, [eventId], (err, rateResult) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: '서버 오류' });
+    }
+  
+    const avgRating = rateResult[0].AvgRating;
+    const reviewCount = rateResult[0].ReviewCount;
+  
+  db.query(query, [eventId], (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: '서버 오류' });
+    } else if (results.length > 0) {
+      res.status(200).json({
+        avgRating,
+        reviewCount,
+        results
+    }); 
+      console.log('Event reviews:', results);
+    } else {
+      res.status(404).json({ message: '리뷰를 찾을 수 없습니다.' });
+    }
+  });
+});
+});
+
+// 내 리뷰 가져오기 
+app.post('/api/myreviews', (req, res) => {
+  const { userID } = req.body;
+  const queryRate = `
+  SELECT AVG(Rating) AS AvgRating, COUNT(*) AS ReviewCount 
+  FROM (
+    SELECT Rating FROM EventReview WHERE UserID = ?
+    UNION ALL
+    SELECT Rating FROM HotelReview WHERE UserID = ?
+  ) AS combined_reviews;
+`;
+const query = `
+SELECT * FROM (
+  SELECT * FROM EventReview WHERE UserID = ?
+  UNION ALL
+  SELECT * FROM HotelReview WHERE UserID = ?
+) AS combined_reviews;
+`;
+  console.log('my Review 백엔드 호출', userID);
+
+  db.query(queryRate, [userID, userID], (err, rateResult) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: '서버 오류' });
+    }
+  
+    const avgRating = rateResult[0].AvgRating;
+    const reviewCount = rateResult[0].ReviewCount;
+  
+  db.query(query, [userID, userID], (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: '서버 오류' });
+    } else if (results.length > 0) {
+      res.status(200).json({
+        avgRating,
+        reviewCount,
+        results
+    }); 
+      console.log('Event reviews:', results);
+    } else {
+      res.status(404).json({ message: '리뷰를 찾을 수 없습니다.' });
+    }
+  });
+});
+});
+
+// 북마크 가져오기
+app.post("/api/bookmarks", (req, res) => {
+  const { userID } = req.body;
+  console.log('함수 호출',userID);
+  
+  const query =  `
+    SELECT
+    BookmarkID, 
+    COALESCE(e.EventID, h.hotelID) AS TypeID, 
+    COALESCE(e.EventTitle, h.hotelName) AS Name,
+    COALESCE(e.Region, h.hotelRegion) AS Region
+    FROM 
+    Bookmark b
+    LEFT JOIN Event e ON b.EventID = e.EventID
+    LEFT JOIN Hotel h ON b.HotelID = h.HotelID
+    WHERE UserID = ?;
+  `;
+  
+  db.query(query, [userID], (err, results) => {
+    if (err) {
+      console.log('에러');
+      return res.status(500).json({ message: "북마크를 가져오는 데 실패했습니다." });
+    }
+    res.json(results); // 결과 반환
+    console.log('결과',results);
+  });
+});
+
+// 북마크 삭제
+app.delete("/api/bookmarks/:bookmarkId", (req, res) => {
+  const { bookmarkId } = req.params;
+
+  const query = `DELETE FROM Bookmark WHERE BookmarkID = ?`;
+  console.log('삭제함수');
+  db.query(query, [bookmarkId], (err, result) => {
+    if (err) {
+      return res.status(500).json({ message: "북마크 삭제 실패" });
+    }
+    res.json({ message: "북마크 삭제 성공" });
+  });
+});
 
 // 유저 정보 받아오기 - 세션
 // app.get('/api/user', (req, res) => {

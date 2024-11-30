@@ -17,11 +17,12 @@
     background-color: #7B949A;
     border-radius: 50px;
     border-color: #0F353C;
-    border: 1px solid;
+    border: 2px solid;
     margin-top: 8px;
     cursor: pointer;
     font-size: 16px;
     color: #FFFFFF;
+    font-weight: bold;
   }
   
   .tag-button-primary {
@@ -30,11 +31,12 @@
     background-color: #FFFFFF;
     border-radius: 50px;
     border-color: #7B949A;
-    border: 1px solid;
+    border: 2px solid;
     margin-top: 8px;
     cursor: pointer;
     font-size: 16px;
     color: #7B949A;
+    font-weight: bold;
   }
   
   .link-button {

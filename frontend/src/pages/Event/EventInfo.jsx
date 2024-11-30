@@ -1,12 +1,14 @@
 /* [행사 하나의 상세 정보를 보여주는 페이지] */
 import React, {useEffect, useState} from "react";
-import { useParams, } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import "../../styles/EventInfo.css";
 import "../../styles/Event.css";
+import CustomButton from '../../components/CustomButton.jsx';
 
 function EventInfo() {
   const { id } = useParams(); // URL에서 이벤트 ID 추출
   const [eventData, setEventData] = useState([]); // 이벤트 데이터를 저장할 상태
+  const navigate = useNavigate();
 
 
   // const eventData = {
@@ -54,9 +56,17 @@ useEffect(() => {
         </div>
         <div className="event-rating">
           <p>
-            평균 별점 : {eventData.AvgRating} ({eventData.reviews})
+            평균 별점 : {eventData.AvgRating} ({eventData.ReviewCount})
           </p>
-          <button className="review-button">후 기</button>
+          {/* <button className="review-button">후 기</button> */}
+          <CustomButton
+              text={'후 기'}
+              textColor={'#000000'}
+              innerColor={'#CBEDF5'}
+              borderColor={'#9FCED9'}
+              //onClick={() => navigate(`/eventReview/${id}`)}
+              onClick={() => navigate('eventReview')}
+            />
         </div>
 
         <div className="event-details">
