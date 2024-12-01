@@ -44,9 +44,8 @@
 .guests-container button {
   font-size: 18px;
   padding: 5px 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #333;
   border-radius: 5px;
-  background: #fff;
   cursor: pointer;
   margin-inline: 20px;
 }

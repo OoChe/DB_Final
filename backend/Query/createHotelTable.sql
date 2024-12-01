@@ -74,3 +74,14 @@ VALUES (
     280000,
     'dongguki'
 );
+
+SELECT
+      h.hotelID,
+      h.hotelName,
+      h.hotelRegion,
+      ROUND(IFNULL(AVG(r.Rating), 0), 1) AS hotelRate,
+      u.UserName
+    FROM Hotel h
+    LEFT JOIN User u ON h.hotelOwnerID = u.userID
+    LEFT JOIN HotelReview r ON h.hotelID = r.hotelID
+    GROUP BY h.hotelID, h.hotelName, h.hotelRegion, u.UserName;

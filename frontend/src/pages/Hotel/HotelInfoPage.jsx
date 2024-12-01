@@ -25,6 +25,7 @@ function HotelInfoPage() {
         const data = await response.json();
         setHotelData(data); // 상태에 데이터 저장
         setLoading(false);
+        console.log('결과: ', hotelData);
       } catch (err) {
         console.error(err);
         setError(err.message);
@@ -33,7 +34,7 @@ function HotelInfoPage() {
     };
 
     fetchHotelDetails(); // 컴포넌트가 마운트될 때 데이터 가져오기
-  }, [id]);
+  }, []);
 
   if (loading) {
     return <div>데이터를 불러오는 중입니다...</div>;
@@ -53,9 +54,7 @@ function HotelInfoPage() {
         <h1 className='hotel-title'>{hotelData.hotelName}</h1>
         <div className='stars-wrapper'>{renderStars(hotelData.hotelRate)}</div>
         <div className='hotel-rating'>
-          <p>
-            평균 별점 : {hotelData.hotelRate} ({hotelData.hotelRate})
-          </p>
+          <p>평균 별점 : {hotelData.hotelRate} / 5</p>
           <CustomButton
             text={'후 기'}
             textColor={'#000000'}

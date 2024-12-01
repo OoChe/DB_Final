@@ -44,6 +44,7 @@ function HotelList({ selectedRegion = '전체' }) {
 
   useEffect(() => {
     fetchHotels(); // 컴포넌트가 마운트되면 호출
+    console.log('결과: ', sortedHotels);
   }, []);
 
   return (
