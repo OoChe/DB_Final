@@ -10,18 +10,6 @@ function EventInfo() {
   const [eventData, setEventData] = useState([]); // 이벤트 데이터를 저장할 상태
   const navigate = useNavigate();
 
-  // const eventData = {
-  //   title: "행사 이름",
-  //   subtitle: "부제목",
-  //   rating: 4.0,
-  //   reviews: 12,
-  //   region: "서울",
-  //   date: "동국이",
-  //   description: "행사에 대한 설명",
-  //   location: "서울특별시 중구 필동로 1길 30",
-  //   imageUrl: "", // 이미지 URL (비어 있으면 기본 이미지)
-  // };
-
   // 백엔드에서 데이터를 가져오는 함수
   const fetchEventDetail = async () => {
     console.log('함수 실행', id);
