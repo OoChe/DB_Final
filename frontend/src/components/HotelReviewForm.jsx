@@ -2,35 +2,35 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 //function ReviewForm({ onAddReview }) {
-function ReviewForm() {
+function HotelReviewForm() {
   const [rating, setRating] = useState(0);
   const [content, setContent] = useState('');
   const { id } = useParams();
   const userID = localStorage.getItem('userID');
 
   // 폼 제출 처리
-  const handleSubmit = async (e) => {
+  const handleHotelSubmit = async (e) => {
     console.log(userID);
     e.preventDefault();
     if (rating > 0 && content.trim() !== '') {
       // 서버에 후기 데이터를 전송
       const reviewData = { userID, id, rating, content };
       try {
-        const response = await fetch('http://localhost:3001/api/event/review', {
+        const response = await fetch('http://localhost:3001/api/hotel/review', {
           method: 'POST', // HTTP POST 요청
           headers: {
             'Content-Type': 'application/json', // JSON 요청
           },
-          body: JSON.stringify(reviewData), 
+          body: JSON.stringify(reviewData), // 데이터 JSON 직렬화
         });
 
         const result = await response.json();
 
         if (response.ok) {
-          alert("후기가 성공적으로 등록되었습니다!");
+          alert('후기가 성공적으로 등록되었습니다!');
+          //onAddReview({ rating, content, date: new Date().toLocaleString() }); // 부모 컴포넌트에 전달
           setRating(0); // 상태 초기화
-          setContent("");
-          window.location.reload();
+          setContent('');
         } else {
           alert(result.message || '후기 등록에 실패했습니다.');
         }
@@ -56,7 +56,7 @@ function ReviewForm() {
   //   };
 
   return (
-    <form className='review-form' onSubmit={handleSubmit}>
+    <form className='review-form' onSubmit={handleHotelSubmit}>
       <div className='rating'>
         {[1, 2, 3, 4, 5].map((star) => (
           <span
@@ -86,4 +86,4 @@ function ReviewForm() {
   );
 }
 
-export default ReviewForm;
+export default HotelReviewForm;

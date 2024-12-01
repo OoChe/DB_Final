@@ -62,25 +62,71 @@ const fetchHotelById = (hotelID) => {
 };
 
 // 예약 정보 저장 쿼리 함수
-const saveReservation = async (
+const saveReservation = (
   hotelID,
   checkInDate,
   checkOutDate,
   reserveNum,
-  userID
+  userID,
+  callback
 ) => {
   const query = `
     INSERT INTO Reservation (hotelID, checkInDate, checkOutDate, reserveNum, userID)
     VALUES (?, ?, ?, ?, ?)
   `;
 
-  await db.query(query, [
-    hotelID,
-    checkInDate,
-    checkOutDate,
-    reserveNum,
-    userID,
-  ]);
+  db.query(
+    query,
+    [hotelID, checkInDate, checkOutDate, reserveNum, userID],
+    (err, results) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, results); // 성공 시 결과 반환
+      }
+    }
+  );
 };
 
-module.exports = { fetchHotelList, fetchHotelById, saveReservation };
+// 숙소 평균 평점과 리뷰 수 가져오기
+const getHotelRatingAndCount = (hotelID) => {
+  const query =
+    'SELECT AVG(Rating) AS AvgRating, COUNT(*) AS ReviewCount FROM HotelReview WHERE HotelID = ?';
+
+  return new Promise((resolve, reject) => {
+    db.query(query, [hotelID], (err, results) => {
+      if (err) return reject(err);
+      resolve(results[0]); // 단일 결과 반환
+    });
+  });
+};
+
+// 숙소 리뷰 가져오기
+const getHotelReviews = (hotelID) => {
+  const query = 'SELECT * FROM HotelReview WHERE HotelID = ?';
+
+  return new Promise((resolve, reject) => {
+    db.query(query, [hotelID], (err, results) => {
+      if (err) return reject(err);
+      resolve(results); // 리뷰 리스트 반환
+    });
+  });
+};
+
+// 숙소 리뷰 작성하기
+const insertHotelReview = (userID, hotelID, rating, content, callback) => {
+  const query = `
+    INSERT INTO HotelReview (UserID, HotelID, Rating, Content)
+    VALUES (?, ?, ?, ?)
+  `;
+  db.query(query, [userID, hotelID, rating, content], callback);
+};
+
+module.exports = {
+  fetchHotelList,
+  fetchHotelById,
+  saveReservation,
+  getHotelRatingAndCount,
+  getHotelReviews,
+  insertHotelReview,
+};

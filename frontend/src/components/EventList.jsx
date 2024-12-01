@@ -89,7 +89,8 @@ function EventList({ selectedRegion = '전체', selectedMonth = '전체'}) {
                 region={event.Region}
                 date={event.EventDate}
                 description={event.EventDescription}
-                imgUrl={event.ImgUrl}           />
+                imageUrl={event.eventImageUrl}
+            />
             </Link>
             ))}
             </div>

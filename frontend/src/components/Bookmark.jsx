@@ -16,8 +16,7 @@ const [bookmarks, setBookmarks] = useState([]);
 
   const bookmarkFiltering = bookmarks.filter((bookmark) => {
     if (selectedTag === "전체") return true; // 모든 태그 표시
-    if (selectedTag === "행사") return bookmark.TypeID.startsWith("E");
-    if (selectedTag === "숙소") return bookmark.TypeID.startsWith("H");
+    if (selectedTag === "행사") return bookmark;
     return false;
   });
 

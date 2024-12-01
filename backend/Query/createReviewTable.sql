@@ -1,7 +1,7 @@
 CREATE TABLE HotelReview (
     ReviewID INT AUTO_INCREMENT PRIMARY KEY, -- 후기 고유 ID
     UserID VARCHAR(20) NOT NULL,                     -- 작성자 ID
-    HotelID VARCHAR(10) NOT NULL,
+    HotelID INT NOT NULL,
     Rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5), -- 별점 (1~5)
     Content TEXT NOT NULL,                    -- 후기 내용
     Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 작성 날짜 (그냥 추가해봄.. 빼도 됨)

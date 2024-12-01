@@ -1,95 +1,94 @@
 /* Button.css */
 .btn {
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    font-family: TheJamsil-regular;
-  }
-  
-  .btn:hover {
-    opacity: 0.8;
-  }
-  
-  .tag-button-highlight {
-    width: 80px;
-    padding: 5px;
-    background-color: #7B949A;
-    border-radius: 50px;
-    border-color: #0F353C;
-    border: 2px solid;
-    margin-top: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    color: #FFFFFF;
-    font-weight: bold;
-  }
-  
-  .tag-button-primary {
-    width: 80px;
-    padding: 5px;
-    background-color: #FFFFFF;
-    border-radius: 50px;
-    border-color: #7B949A;
-    border: 2px solid;
-    margin-top: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    color: #7B949A;
-    font-weight: bold;
-  }
-  
-  .link-button {
-    display: inline-block;
-    width: 90px;
-    padding: 10px;
-    background-color: #97B3B7;
-    border-radius: 50px;
-    border-color: #0F353C;
-    border: 1px solid;
-    margin-top: 20px;
-    margin-left: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    color: #FFFFFF;
-    text-decoration: none;
-  }
-  
-  .link-button:hover {
-    background-color: #9FCED9;
-  }
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  font-family: 'TheJamsil-regular';
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.tag-button-highlight {
+  width: 80px;
+  padding: 5px;
+  background-color: #7b949a;
+  border-radius: 50px;
+  border-color: #0f353c;
+  border: 2px solid;
+  margin-top: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.tag-button-primary {
+  width: 80px;
+  padding: 5px;
+  background-color: #ffffff;
+  border-radius: 50px;
+  border-color: #7b949a;
+  border: 2px solid;
+  margin-top: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #7b949a;
+  font-weight: bold;
+}
+
+.link-button {
+  display: inline-block;
+  width: 90px;
+  padding: 10px;
+  background-color: #97b3b7;
+  border-radius: 50px;
+  border-color: #0f353c;
+  border: 1px solid;
+  margin-top: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.link-button:hover {
+  background-color: #9fced9;
+}
 
 .submit-button {
-    width: 100px;
-    padding: 10px;
-    background-color: #CBEDF5;
-    border-radius: 50px;
-    border-color: #9FCED9;
-    border: 1px solid;
-    margin-top: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    color: #484848;
+  width: 100px;
+  padding: 10px;
+  background-color: #cbedf5;
+  border-radius: 50px;
+  border-color: #9fced9;
+  border: 1px solid;
+  margin-top: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #484848;
 }
 
 .submit-button:hover {
-    background-color: #9FCED9;
+  background-color: #9fced9;
 }
 
 .submit-button-big {
-    width: 500px;
-    padding: 10px;
-    background-color: #CBEDF5;
-    border-radius: 50px;
-    border-color: #9FCED9;
-    border: 1px solid;
-    margin-top: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    color: #484848;
+  width: 500px;
+  padding: 10px;
+  background-color: #cbedf5;
+  border-radius: 50px;
+  border-color: #9fced9;
+  border: 1px solid;
+  margin-top: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #484848;
 }
 
 .submit-button-big:hover {
-    background-color: #9FCED9;
+  background-color: #9fced9;
 }
-  

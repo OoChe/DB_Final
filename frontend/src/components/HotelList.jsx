@@ -37,7 +37,6 @@ function HotelList({ selectedRegion = '전체' }) {
       // 3306 -> 3000 수정해야 API 호출 실패 안 뜸
       const data = await response.json(); // JSON 데이터를 파싱
       setHotelList(data); // 상태에 저장
-      console.log(hotelList);
     } catch (error) {
       console.error('API 호출 실패:', error);
     }
@@ -45,6 +44,7 @@ function HotelList({ selectedRegion = '전체' }) {
 
   useEffect(() => {
     fetchHotels(); // 컴포넌트가 마운트되면 호출
+    console.log('결과: ', sortedHotels);
   }, []);
 
   return (

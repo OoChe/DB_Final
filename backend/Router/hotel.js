@@ -1,5 +1,11 @@
 const express = require('express');
-const { getHotels, getHotelDetails, makeReservation } = require('../Configs/hotelController');
+const {
+  getHotels,
+  getHotelDetails,
+  makeReservation,
+  getHotelReviewsController,
+  addHotelReview,
+} = require('../Configs/hotelController');
 
 const router = express.Router();
 
@@ -8,6 +14,9 @@ router.get('/', getHotels);
 // 숙소 상세 정보 API
 router.get('/:hotelID', getHotelDetails);
 // 예약 요청 처리
-router.post('/reserve', makeReservation);
+router.post('/:hotelID/reserve', makeReservation);
+router.get('/reviews/:hotelID', getHotelReviewsController);
+// 리뷰 작성 라우트
+router.post('/review', addHotelReview);
 
 module.exports = router;
