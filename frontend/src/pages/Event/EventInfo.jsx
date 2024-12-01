@@ -97,8 +97,8 @@ function EventInfo() {
         </a>
       </div>
       <div className='event-image'>
-        {eventData.EventImageURL ? (
-          <img src={eventData.EventImageURL} alt='Event' />
+        {eventData.ImgUrl ? (
+          <img src={eventData.ImgUrl} alt='Event' />
         ) : (
           <div className='placeholder'>이미지</div>
         )}
