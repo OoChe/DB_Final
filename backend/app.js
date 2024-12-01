@@ -33,7 +33,7 @@ app.get('/api/events/:id', (req, res) => {
   const eventId = req.params.id; // URL 파라미터에서 ID를 가져옴
   //const query = 'SELECT * FROM Event WHERE EventID = ?';  // 이벤트 ID로 쿼리
   const query =
-    'SELECT e.EventID, e.EventTitle, e.EventSubtitle, e.Region, e.EventDate, e.Address, e.EventDescription, e.EventURL, COALESCE(ROUND(AVG(r.Rating), 2), 0) AS AvgRating, COUNT(r.ReviewID) AS ReviewCount FROM Event e LEFT JOIN EventReview r ON e.EventID = r.EventID WHERE e.EventID = ?';
+    'SELECT e.EventID, e.EventTitle, e.EventSubtitle, e.Region, e.EventDate, e.Address, e.EventDescription, e.EventURL, e.EventImageURL, COALESCE(ROUND(AVG(r.Rating), 2), 0) AS AvgRating, COUNT(r.ReviewID) AS ReviewCount FROM Event e LEFT JOIN EventReview r ON e.EventID = r.EventID WHERE e.EventID = ?';
   console.log('Event details 백엔드 호출', eventId);
   db.query(query, [eventId], (err, results) => {
     if (err) {

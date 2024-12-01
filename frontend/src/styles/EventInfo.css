@@ -110,10 +110,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 35%;
-    max-height: 300px;
+    max-width: 20%;
+    max-height: 600px;
     background-color: #e0e0e0;
     text-align: center;
+    background-size: cover; /* 이미지를 요소 크기에 맞게 채움 */
+    background-position: center; /* 이미지를 중심으로 배치 */
+    background-repeat: no-repeat; /* 이미지 반복 방지 */
+    overflow: hidden; /* 선택 사항: 콘텐츠가 넘어갈 경우 숨김 */
   }
   
   .event-image img {

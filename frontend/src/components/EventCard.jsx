@@ -1,25 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/EventCard.css'; 
+import '../styles/EventCard.css';
 import { useState } from 'react';
 
-const EventCard = ({ id, title, region, date, description }) => {
-
+const EventCard = ({ id, title, region, date, description, imageUrl }) => {
   const [clicked, setClicked] = useState(false);
-  
+
   // 즐겨찾기 아이콘 상태 변경 함수
   const handleClick = () => {
     setClicked(!clicked); // 클릭할 때마다 상태 변경
   };
 
   return (
-    <div className = "card">
-      <div className = "image"></div>
-      <div className = "content">
-      <h3 className="title">{title}</h3>
-        <p className="subtitle">{region}</p>
-        <p className="date">{date}</p>
-        <p className="date">{description}</p>
+    <div className='card'>
+      <div
+        className='image'
+        style={{
+          backgroundImage: `url(${
+            imageUrl || '../assets/image//default-image.png'
+          })`,
+        }}
+      ></div>
+      <div className='content'>
+        <h3 className='title'>{title}</h3>
+        <p className='subtitle'>{region}</p>
+        <p className='date'>{date}</p>
+        <p className='date'>{description}</p>
         {/* <p className="keyword">{keywords.join(', ')}</p> */}
       </div>
       {/* <Link to={`/event/${id}`} className="view-details">View Details</Link> */}
@@ -34,4 +40,3 @@ const EventCard = ({ id, title, region, date, description }) => {
 };
 
 export default EventCard;
-
