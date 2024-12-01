@@ -82,9 +82,9 @@ function EventList({ selectedRegion = '전체', selectedMonth = '전체'}) {
         <hr></hr>
             <div className="event-list">
             {sortedEvents.map(event => (
-            <Link key={event.EventID} to={`/event/${event.EventID}`} style={{ textDecoration: 'none' }}>
+            <Link key={event.AutoID} to={`/event/${event.AutoID}`} style={{ textDecoration: 'none' }}>
             <EventCard
-                id={event.EventID}
+                id={event.AutoID}
                 title={event.EventTitle}
                 region={event.Region}
                 date={event.EventDate}

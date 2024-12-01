@@ -34,6 +34,7 @@ app.get('/api/events/:id', (req, res) => {
   //const query = 'SELECT * FROM Event WHERE EventID = ?';  // 이벤트 ID로 쿼리
   const query =
     'SELECT e.EventID, e.EventTitle, e.EventSubtitle, e.Region, e.EventDate, e.Address, e.EventDescription, e.EventURL, e.EventImageURL, COALESCE(ROUND(AVG(r.Rating), 2), 0) AS AvgRating, COUNT(r.ReviewID) AS ReviewCount FROM Event e LEFT JOIN EventReview r ON e.EventID = r.EventID WHERE e.EventID = ?';
+
   console.log('Event details 백엔드 호출', eventId);
   db.query(query, [eventId], (err, results) => {
     if (err) {
@@ -258,10 +259,10 @@ app.post('/api/event/review', (req, res) => {
 
 // 리뷰 불러오기
 app.get('/api/reviews/:id', (req, res) => {
-  const eventId = req.params.id; // URL 파라미터에서 ID를 가져옴
-  const queryRate =
-    'SELECT AVG(Rating) AS AvgRating, COUNT(*) AS ReviewCount FROM EventReview WHERE EventID = ?';
-  const query = 'SELECT * FROM EventReview WHERE EventID = ?'; // 이벤트 ID로 쿼리
+  const eventId = req.params.id;  // URL 파라미터에서 ID를 가져옴
+  //const queryRate = 'SELECT AVG(Rating) AS AvgRating, COUNT(*) AS ReviewCount FROM EventReview WHERE EventID = ?'
+  const queryRate = 'SELECT AVG(Rating) AS AvgRating, COUNT(*) AS ReviewCount FROM EventReview WHERE EventID = ?';
+  const query = 'SELECT * FROM EventReview WHERE EventID = ?';  // 이벤트 ID로 쿼리
   console.log('Event Review 백엔드 호출', eventId);
 
   db.query(queryRate, [eventId], (err, rateResult) => {
@@ -351,8 +352,8 @@ app.post('/api/bookmarks', (req, res) => {
     COALESCE(e.Region, h.hotelRegion) AS Region
     FROM 
     Bookmark b
-    LEFT JOIN Event e ON b.EventID = e.EventID
-    LEFT JOIN Hotel h ON b.HotelID = h.HotelID
+    LEFT JOIN Event e ON b.EventID = e.AutoID
+    LEFT JOIN Hotel h ON b.HotelID = h.AutoID
     WHERE UserID = ?;
   `;
 

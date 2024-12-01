@@ -4,6 +4,7 @@ import '../styles/EventCard.css';
 import { useState } from 'react';
 
 const EventCard = ({ id, title, region, date, description, imageUrl }) => {
+
   const [clicked, setClicked] = useState(false);
 
   // 즐겨찾기 아이콘 상태 변경 함수
