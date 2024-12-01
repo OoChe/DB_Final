@@ -25,7 +25,7 @@ function HotelInfoPage() {
         const data = await response.json();
         setHotelData(data); // 상태에 데이터 저장
         setLoading(false);
-        console.log('결과: ', hotelData);
+        console.log('결과: ', data);
       } catch (err) {
         console.error(err);
         setError(err.message);
@@ -89,13 +89,15 @@ function HotelInfoPage() {
                 <td>
                   <strong>주변 관광지:</strong>
                 </td>
-                {hotelData.tourspot
-                  ? hotelData.tourspot.split(',').map((spot, index) => (
-                      <tr key={index}>
-                        <td>{spot.trim()}</td> {/* trim()으로 앞뒤 공백 제거 */}
-                      </tr>
-                    ))
-                  : null}
+                <td>
+                  {hotelData.tourspot
+                    ? hotelData.tourspot
+                        .split(',')
+                        .map((spot, index) => (
+                          <div key={index}>{spot.trim()}</div>
+                        ))
+                    : '없음'}
+                </td>
               </tr>
             </tbody>
           </table>
