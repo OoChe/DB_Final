@@ -33,7 +33,7 @@ app.get('/api/events/:id', (req, res) => {
   const eventId = req.params.id; // URL 파라미터에서 ID를 가져옴
   //const query = 'SELECT * FROM Event WHERE EventID = ?';  // 이벤트 ID로 쿼리
   const query =
-    'SELECT e.EventID, e.EventTitle, e.EventSubtitle, e.Region, e.EventDate, e.Address, e.EventDescription, e.EventURL, e.EventImageURL, COALESCE(ROUND(AVG(r.Rating), 2), 0) AS AvgRating, COUNT(r.ReviewID) AS ReviewCount FROM Event e LEFT JOIN EventReview r ON e.EventID = r.EventID WHERE e.EventID = ?';
+    'SELECT e.EventID, e.EventTitle, e.EventSubtitle, e.Region, e.EventDate, e.Address, e.EventDescription, e.EventURL, e.ImgUrl, COALESCE(ROUND(AVG(r.Rating), 2), 0) AS AvgRating, COUNT(r.ReviewID) AS ReviewCount FROM Event e LEFT JOIN EventReview r ON e.EventID = r.EventID WHERE e.EventID = ?';
 
   console.log('Event details 백엔드 호출', eventId);
   db.query(query, [eventId], (err, results) => {
@@ -259,10 +259,11 @@ app.post('/api/event/review', (req, res) => {
 
 // 리뷰 불러오기
 app.get('/api/reviews/:id', (req, res) => {
-  const eventId = req.params.id;  // URL 파라미터에서 ID를 가져옴
+  const eventId = req.params.id; // URL 파라미터에서 ID를 가져옴
   //const queryRate = 'SELECT AVG(Rating) AS AvgRating, COUNT(*) AS ReviewCount FROM EventReview WHERE EventID = ?'
-  const queryRate = 'SELECT AVG(Rating) AS AvgRating, COUNT(*) AS ReviewCount FROM EventReview WHERE EventID = ?';
-  const query = 'SELECT * FROM EventReview WHERE EventID = ?';  // 이벤트 ID로 쿼리
+  const queryRate =
+    'SELECT AVG(Rating) AS AvgRating, COUNT(*) AS ReviewCount FROM EventReview WHERE EventID = ?';
+  const query = 'SELECT * FROM EventReview WHERE EventID = ?'; // 이벤트 ID로 쿼리
   console.log('Event Review 백엔드 호출', eventId);
 
   db.query(queryRate, [eventId], (err, rateResult) => {
@@ -410,7 +411,7 @@ app.delete('/api/bookmarks/:bookmarkId', (req, res) => {
 // 상위 Top10 여행지 제공 함수
 app.get('/api/top-destinations', (req, res) => {
   const rankingQuery = `SELECT * FROM Ranking ORDER BY RankingNum`;
-  const eventQuery = `SELECT Region, eventTitle, eventDate, eventImageUrl
+  const eventQuery = `SELECT Region, eventTitle, eventDate, ImgUrl
                       FROM Event 
                       WHERE Region IN (SELECT cityName FROM Ranking ORDER BY RankingNum) 
                       ORDER BY eventDate`;
@@ -433,14 +434,14 @@ app.get('/api/top-destinations', (req, res) => {
       // 지역별 행사 매핑
       const eventsByRegion = {};
       eventResults.forEach((event) => {
-        const { Region, eventTitle, eventDate, eventImageUrl } = event;
+        const { Region, eventTitle, eventDate, ImgUrl } = event;
         if (!eventsByRegion[Region]) {
           eventsByRegion[Region] = [];
         }
         eventsByRegion[Region].push({
           title: eventTitle, // 키 이름 일치
           date: eventDate,
-          imageUrl: eventImageUrl,
+          imageUrl: ImgUrl,
         });
       });
       console.log(eventsByRegion);
