@@ -1,8 +1,9 @@
 /* [행사 하나의 상세 정보를 보여주는 페이지] */
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import renderStars from '../../components/StarFilled';
 import Reservation from '../../components/Reservation';
+import CustomButton from '../../components/CustomButton';
 import '../../styles/HotelInfo.css';
 import '../../styles/Hotel.css';
 
@@ -11,6 +12,7 @@ function HotelInfoPage() {
   const [hotelData, setHotelData] = useState(null); // 호텔 데이터를 저장할 상태
   const [loading, setLoading] = useState(true); // 로딩 상태
   const [error, setError] = useState(null); // 에러 상태
+  const navigate = useNavigate();
 
   // 호텔 데이터를 가져오는 함수
   useEffect(() => {
@@ -54,7 +56,13 @@ function HotelInfoPage() {
           <p>
             평균 별점 : {hotelData.hotelRate} ({hotelData.hotelRate})
           </p>
-          <button className='review-button'>후 기</button>
+          <CustomButton
+            text={'후 기'}
+            textColor={'#000000'}
+            innerColor={'#CBEDF5'}
+            borderColor={'#9FCED9'}
+            onClick={() => navigate(`/hotel/reviews/${id}`)}
+          />
         </div>
 
         <div className='hotel-details'>

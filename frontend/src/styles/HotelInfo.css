@@ -73,7 +73,6 @@
 .hotel-details-table td:first-child {
   font-weight: bold;
   text-align: left;
-  width: 100px; /* 첫 번째 열 너비 */
 }
 
 .hotel-details-table td:last-child {
